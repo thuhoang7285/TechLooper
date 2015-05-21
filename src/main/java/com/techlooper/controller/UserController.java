@@ -3,6 +3,7 @@ package com.techlooper.controller;
 import com.techlooper.entity.SalaryReview;
 import com.techlooper.entity.userimport.UserImportEntity;
 import com.techlooper.model.*;
+import com.techlooper.repository.elasticsearch.SalaryReviewRepository;
 import com.techlooper.service.UserEvaluationService;
 import com.techlooper.service.UserImportDataProcessor;
 import com.techlooper.service.UserService;
@@ -38,6 +39,9 @@ public class UserController {
 
   @Resource
   private UserEvaluationService userEvaluationService;
+
+  @Resource
+  private SalaryReviewRepository salaryReviewRepository;
 
   @RequestMapping(value = "/api/users/add", method = RequestMethod.POST)
   public void save(@RequestBody UserImportData userImportData, HttpServletResponse httpServletResponse) {
@@ -81,12 +85,6 @@ public class UserController {
     return userService.findTalent(param);
   }
 
-  @RequestMapping(value = "/api/user/talentProfile/{hashEmail}", method = RequestMethod.GET)
-  public TalentProfile getTalentProfile(@PathVariable String hashEmail, HttpServletResponse httpServletResponse) {
-    String email = new String(Base64.getDecoder().decode(hashEmail));
-    return userService.getTalentProfile(email);
-  }
-
   @RequestMapping(value = "/api/user/register", method = RequestMethod.POST)
   public List<FieldError> registerUser(@RequestBody @Valid UserInfo userInfo, BindingResult result, HttpServletResponse httpServletResponse) {
     if (result.getFieldErrorCount() > 0) {
@@ -115,8 +113,19 @@ public class UserController {
   }
 
   @RequestMapping(value = "/salaryReview", method = RequestMethod.POST)
-  public SalaryReport evaluateJobOffer(@RequestBody SalaryReview salaryReview) {
-      return userEvaluationService.evaluateJobOffer(salaryReview);
+  public SalaryReview evaluateJobOffer(@RequestBody SalaryReview salaryReview) {
+    userEvaluationService.evaluateJobOffer(salaryReview);
+    return salaryReview;
   }
+
+    @RequestMapping(value = "/saveSurvey", method = RequestMethod.POST)
+    public void saveSurvey(@RequestBody SalaryReviewSurvey salaryReviewSurvey, HttpServletResponse httpServletResponse) {
+        boolean isSaved = userEvaluationService.saveSalaryReviewSurvey(salaryReviewSurvey);
+        if (isSaved) {
+            httpServletResponse.setStatus(HttpServletResponse.SC_OK);
+        } else {
+            httpServletResponse.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        }
+    }
 
 }

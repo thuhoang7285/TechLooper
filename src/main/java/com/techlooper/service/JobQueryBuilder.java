@@ -4,6 +4,7 @@ package com.techlooper.service;
  * Created by phuonghqh on 11/8/14.
  */
 
+import com.techlooper.entity.SalaryReview;
 import com.techlooper.model.HistogramEnum;
 import com.techlooper.model.Skill;
 import com.techlooper.model.TechnicalTerm;
@@ -101,4 +102,10 @@ public interface JobQueryBuilder {
     FilterBuilder getRangeFilterBuilder(String fieldName, Object fromValue, Object toValue);
 
     QueryBuilder skillQueryBuilder(List<String> skills);
+
+    NativeSearchQueryBuilder getVietnamworksJobSearchQuery();
+
+    NativeSearchQueryBuilder getJobSearchQueryForSalaryReview(SalaryReview salaryReview);
+
+    NativeSearchQueryBuilder getJobSearchQueryBySkill(SalaryReview salaryReview);
 }

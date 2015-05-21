@@ -5,6 +5,29 @@
   max-width: 1000px
   padding: 0 0 20px 0
   width: 100%
+  .salary-survey-block
+    width: 100%
+    display: block
+    clear: both
+    -webkit-box-shadow: 0px 1px 0px 0px rgba(235,235,235,1)
+    -moz-box-shadow: 0px 1px 0px 0px rgba(235,235,235,1)
+    box-shadow: 0px 1px 0px 0px rgba(235,235,235,1)
+    background-color: #f3fafe
+    text-align: center
+    h2
+      display: inline-block
+      clear: both
+      font-weight: 400
+      font-size: 20px
+      text-transform: capitalize
+      padding: 12px 20px 5px 20px
+      margin: 0
+      width: 100%
+    p
+      padding: 0 20px 15px 20px
+      font-size: 12px
+      font-style: italic
+      margin-bottom: 1px
   .salary-review-block
     display: block
     clear: both
@@ -15,12 +38,17 @@
       font-weight: 400
       font-size: 17px
       text-transform: capitalize
-      background-color: #f4f4f4
+      background-color: #fff
       float: left
       width: 100%
+      //border-right: 1px solid #ebebeb
+      //border-top: 1px solid #ebebeb
+      //-webkit-box-shadow: 0px 1px 0px 0px rgba(235,235,235,1)
+      //-moz-box-shadow: 0px 1px 0px 0px rgba(235,235,235,1)
+      //box-shadow: 0px 1px 0px 0px rgba(235,235,235,1)
       ul
         margin: 0
-        padding: 0
+        padding: 10px 0 0 0
         li
           width: 32.5%
           float: left
@@ -39,7 +67,7 @@
           display: inline-block
           clear: both
           font-weight: 400
-          font-size: 18px
+          font-size: 15px
           text-transform: capitalize
           padding: 12px 20px
           margin: 0
@@ -169,6 +197,8 @@
         ul
           margin: 0
           padding: 0
+          width: 80%
+          float: left
           li
             width: 100%
             clear: both
@@ -176,11 +206,12 @@
             text-align: left
             span
               display: block
-              width: 10%
+              width: 20%
               float: left
               font-weight: 400
+              text-align: left
             p
-              width: 90%
+              width: 80%
               float: left
               margin: 0
               padding: 0
@@ -190,9 +221,33 @@
                 width: auto
                 display: inline-block
                 padding-right: 10px
+              span.dot-line
+                width: auto
+                display: inline-block
+                padding-right: 10px
+                font-weight: 700
+              span.left
+                background: url(../images/left-tag.png) left -39px no-repeat
+                padding-left: 25px
+                width: auto
+                margin-right: 10px
+                font-weight: 300
+              span.right
+                background: url(../images/right-tag.png) right -39px no-repeat
+                padding-right: 10px
+                line-height: 23px
+                height: 25px
+                width: auto
+                font-weight: 300 !important
               strong
                 font-weight: 400
                 font-size: 16px
+        .verified-data
+          width: 20%
+          float: left
+          text-align: left
+          img
+            width: 100px
       .your-pay-snapshot-block
         display: inline-block
         clear: both
@@ -233,7 +288,7 @@
               padding: 0
               li
                 float: left
-                width: 70%
+                width: 80%
                 border-right: 1px solid #fff
                 padding: 20px
                 text-align: center
@@ -258,7 +313,7 @@
                 a
                   cursor: pointer
               li:last-child
-                width: 30%
+                width: 20%
                 float: left
                 padding-top: 22px
                 a.salary-report-share
@@ -283,12 +338,15 @@
                     font-style: normal
               li.fullCol
                 width: 100%
+                strong
+                  font-size: 16px
           .your-pay-snapshot-chart
             display: block
             clear: both
             padding-top: 20px
             width: 100%
             position: relative
+            height: 200px
             p
               text-align: center
               color: #a6a6a6
@@ -306,29 +364,69 @@
               float: left
               position: relative
               display: inline-block
+              background: url(../images/bg-salary-chart.jpg) left 60px repeat-x
+              height: 125px
             .arrow-right
               background: url(../images/arrow-right.png) right 49px no-repeat
               width: 5%
-              float: left
               height: 120px
+              position: absolute
+              z-index: 99
+              right: 0
+              left: inherit
             .percent-data
               float: left
               color: #a6a6a6
-              text-align: left
+              text-align: right
               font-size: 12px
+              position: absolute
               .salary-number-label
                 display: block
                 clear: both
                 height: 60px
-                border-left: 1px dashed #dddddd
-                padding-left: 5px
+                border-right: 1px dashed #dddddd
+                padding-right: 5px
               .percent-number-label
                 display: block
                 clear: both
+                text-align: right
               .percent-color
                 display: block
                 clear: both
                 height: 40px
+            .percent-data:first-child
+              z-index: 99
+              width: 10%
+              .percent-color
+                background-color: #ebf6ff
+              .salary-number-label
+                text-align: left
+                border-left: 1px dashed #dddddd
+                padding-left: 5px
+              .percent-number-label
+                text-align: left
+            .percent-data:nth-child(2)
+              z-index: 88
+              .percent-color
+                background-color: #bbe1fe
+            .percent-data:nth-child(3)
+              z-index: 77
+              .percent-color
+                background-color: #99d1fa
+            .percent-data:nth-child(4)
+              z-index: 66
+              .percent-color
+                background-color: #61b9fa
+                border-left: 1px dashed #fff
+            .percent-data:nth-child(5)
+              z-index: 55
+              .percent-color
+                background-color: #4398da
+            .percent-data:nth-child(6)
+              z-index: 44
+              .percent-color
+                background-color: #1266a8
+
             .percent-data.zero
               width: 10%
               .percent-color
@@ -340,25 +438,25 @@
             .percent-data.percent25
               width: 25%
               .percent-color
-                background-color: #7fc6fa
+                background-color: #99d1fa
             .percent-data.percent50
               width: 25%
               .percent-color
-                background-color: #7fc6fa
+                background-color: #61b9fa
                 border-left: 1px dashed #fff
             .percent-data.percent75
-              width: 15%
+              width: 25%
               .percent-color
                 background-color: #4398da
             .percent-data.percent90
-              width: 10%
+              width: 15%
               .percent-color
                 background-color: #1266a8
-
             .my-current-rank
               position: absolute
               top: 30px
               left: 30%
+              z-index: 990
               .my-current-salary
                 background-color: #892890
                 -webkit-border-radius: 3px
@@ -395,6 +493,9 @@
               i
                 right: 30px
                 left: auto
+        .gray-background
+          .percent-data
+            position: inherit !important
       .salary-report-feedback
         display: inline-block
         clear: both
@@ -407,17 +508,29 @@
         width: 100%
         padding: 15px
         position: relative
-        h3
-          font-weight: 400
-          font-size: 14px
-          text-transform: capitalize
-          text-align: left
-          padding: 0 5px
-          position: absolute
-          display: inline-block
-          background-color: #fff
-          top: -32px
-          left: 10px
+        .title-header
+          display: block
+          clear: both
+          h3
+            background-color: white
+            display: inline-block
+            font-size: 14px
+            font-weight: 400
+            left: 10px
+            padding: 0 5px
+            position: absolute
+            text-align: left
+            text-transform: capitalize
+            top: -32px
+          .hidden-box
+            width: auto
+            position: absolute
+            right: 10px
+            top: -17px
+            background-color: #fff
+            padding: 5px 10px
+            font-weight: 500
+            cursor: pointer
         .salary-report-feedback-form
           display: block
           clear: both
@@ -452,8 +565,11 @@
                 clear: both
                 width: auto
                 float: left
+                margin: 0
+                strong
+                  color: red
               .select-group
-                width: 30%
+                width: 38%
                 float: right
                 .select-item
                   float: left
@@ -466,6 +582,13 @@
               button
                 min-width: 100px
                 margin: auto
+            .error-messages
+              color: red
+              display: block
+              clear: both
+              text-align: left
+              font-size: 12px
+              font-style: italic
         .note
           clear: both
           display: block
@@ -475,24 +598,24 @@
       clear: both
       margin: 30px auto auto auto
       text-align: left
-      border: 1px solid #d4d7d8
-      -webkit-border-radius: 5px
-      -moz-border-radius: 5px
-      border-radius: 5px
       width: 100%
-      padding: 15px
       position: relative
+      h3
+        text-align: center !important
+        width: 100%
+        position: inherit  !important
+        font-size: 16px !important
+        text-transform: inherit !important
       .thanks-for-share-salary-content
         display: block
         clear: both
-        padding-top: 20px
         ul
           margin: 0
           padding: 10px 0 0 0
           li
             width: 33.333%
             float: left
-            padding: 0 15px
+            padding: 0 10px
             .thanks-for-share-salary-item
               border: 1px solid #ededed
               display: inline-block
@@ -501,8 +624,8 @@
               -webkit-border-radius: 5px
               -moz-border-radius: 5px
               border-radius: 5px
-              padding: 20px
-              min-height: 210px
+              padding: 20px 10px
+              min-height: 195px
             h4
               font-weight: 400
               font-size: 14px
@@ -526,6 +649,203 @@
           padding-top: 10px
           font-weight: 400
           cursor: pointer
+    .best-paid-jobs-block
+      border: 1px solid #d4d7d8
+      border-radius: 5px
+      clear: both
+      display: inline-block
+      margin: 30px auto auto
+      padding: 15px 15px 20px
+      position: relative
+      text-align: left
+      width: 100%
+      .title-header
+        display: block
+        clear: both
+        h3
+          background-color: white
+          display: inline-block
+          font-size: 14px
+          font-weight: 400
+          left: 10px
+          padding: 0 5px
+          position: absolute
+          text-align: left
+          text-transform: capitalize
+          top: -32px
+        .hidden-box
+          width: auto
+          position: absolute
+          right: 10px
+          top: -17px
+          background-color: #fff
+          padding: 5px 10px
+          font-weight: 500
+          cursor: pointer
+      .best-paid-list
+        display: block
+        clear: both
+        padding: 20px 0 0 0
+        p
+          text-align: left
+          padding: 5px 0 5px 10px
+          height: auto
+        .see-more-jobs
+          display: block
+          width: 100%
+          padding-right: 5px
+          a
+            float: right
+            width: auto
+          p.note
+            padding-top: 10px
+            display: inline-block
+            width: 50%
+            height: auto
+            loat: left
+        .email-me-similar-jobs
+          display: block
+          clear: both
+          width: 100%
+          padding-top: 10px
+          text-align: center
+          a
+            margin: auto
+            cursor: pointer
+    .best-paid-companies
+      display: inline-block
+      clear: both
+      width: 100%
+    .best-paid-company
+      display: inline-block
+      float: left
+      background-color: #f7f7f7
+      padding: 15px
+      width: 31%
+      margin: 0 1%
+      ul
+        margin: 0
+        padding: 0
+        width: 100%
+        float: left
+        li
+          display: block
+          clear: both
+          padding-bottom: 5px
+          strong
+            color: #277cbd
+            font-weight: 400
+          span
+            display: inline-block
+            background: url(../images/icon.png) left top no-repeat
+            padding-left: 38px
+            line-height: 34px
+            width: 100%
+          span.job-title
+            background-position: 0 0px
+          span.company
+            background-position: 0 -915px
+          span.up
+            background-position: 0 -871px
+            width: auto
+            display: inline-block
+            padding-left: 25px
+        li:first-child
+          font-weight: 400
+          font-size: 30px
+          text-align: center
+        li:last-child
+          padding-bottom: 0
+      .btn-see-more
+        width: 100%
+        float: left
+        text-align: center
+        padding: 15px 0 0 0
+    .best-paid-company:first-child
+      margin-left: 1.5%
+.salary-review-page
+  .salary-review-block
+    .salary-review-content
+      .email-similar-jobs-block
+        text-align: center
+        background-color: #f4f4f4
+        -webkit-border-radius: 5px
+        -moz-border-radius: 5px
+        border-radius: 5px
+        padding: 15px 0 0
+        display: none
+        h3
+          font-size: 16px
+          font-weight: 400
+        .email-similar-jobs-form
+          padding: 20px
+          width: 70%
+          text-align: left
+          margin: auto
+          .email-similar-jobs-field
+            display: block
+            clear: both
+            padding-bottom: 5px
+            label
+              float: left
+              width: 28%
+              font-size: 14px
+              font-weight: 300
+              padding-top: 7px
+              strong
+                color: red
+                font-weight: 300
+            label.time-to-send
+              width: 15%
+              padding-right: 10px
+              text-align: right
+            input
+              border: 1px solid #d4d7d8
+              border-radius: 5px
+              line-height: 32px
+              padding: 0 10px
+              width: 72%
+              float: left
+              margin-bottom: 5px
+            input.email-get-similar-jobs
+              width: 51%
+            .selectize-control
+              width: 72%
+              float: left
+            .selectize-control.select-time-to-send
+              width: 20%
+              margin-left: 1%
+            .selectize-control.multi .selectize-input.has-items
+              padding-left: 4px
+            p
+              width: 100%
+              padding-left: 28%
+              font-weight: 400
+              font-size: 16px
+              margin: 0
+          .email-similar-jobs-field.submit
+            text-align: left
+            padding-left: 28%
+            button
+              margin: auto
+              padding: 6px 25px
+.success-alert-box
+  width: 100%
+  text-align: center
+  display: none
+  transition: display 1s ease
+  -moz-transition: display 1s ease
+  -webkit-transition: display 1s ease
+  .alert-success
+    width: 100%
+    display: inline-block
+    padding: 10px
+    background-image: none
+.success-alert-box.show
+  display: block
+  transition: display 1s ease
+  -moz-transition: display 1s ease
+  -webkit-transition: display 1s ease
 .selectize-control.plugin-remove_button
   .active[data-value]
     .remove

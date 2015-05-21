@@ -74,20 +74,27 @@ techlooper.config(["$routeProvider", "$translateProvider", "$authProvider", "loc
 
     $authProvider.loginRedirect = undefined;
 
-    $translateProvider.useLocalStorage();
-    $translateProvider.useStaticFilesLoader({
-      prefix: "modules/translation/messages_",
-      suffix: ".json"
-    });
-
-    $translateProvider.registerAvailableLanguageKeys(['en', 'vi']);
-    $translateProvider.fallbackLanguage("en");
-    $translateProvider.preferredLanguage("en");
+    $translateProvider
+      .useLocalStorage()
+      .useStaticFilesLoader({
+        prefix: "modules/translation/messages_",
+        suffix: ".json"
+      })
+      .registerAvailableLanguageKeys(['en', 'vi'], {
+        'en-US': 'en', 'en-UK': 'en', 'en_US': 'en', 'en_UK': 'en', "*": "en"
+      })
+      .fallbackLanguage('en')
+      .uniformLanguageTag('bcp47') // enable BCP-47, must be before determinePreferredLanguage!
+      .determinePreferredLanguage();
 
     $routeProvider
       .when("/home", {
-        templateUrl: "modules/talent-search/home.tem.html",
-        controller: "tsMainController"
+        templateUrl: "modules/home-page/home-page.tem.html",
+        controller: "homePageController"
+      })
+      .when("/hiring", {
+        templateUrl: "modules/hiring/hiring.tem.html",
+        controller: "hiringController"
       })
       .when("/talent-profile/:text", {
         templateUrl: "modules/talent-search/home.tem.html",
@@ -149,20 +156,23 @@ techlooper.config(["$routeProvider", "$translateProvider", "$authProvider", "loc
         templateUrl: "modules/current-job/salary-review.tem.html",
         controller: "salaryReviewController"
       })
+      .when("/price-job", {
+        templateUrl: "modules/price-job/price-job.tem.html",
+        controller: "priceJobController"
+      })
       .otherwise({
         redirectTo: function () {
           if (window.location.host.indexOf("hiring") >= 0) {
             return "/home";
           }
-          return "/pie-chart";
+          return "/home";
         }
       });
   }]);
 
 techlooper.run(function (shortcutFactory, connectionFactory, loadingBoxFactory, cleanupFactory,
                          tourService, signInService, historyFactory, userService, routerService, $location,
-                         utils, $rootScope, $translate, jsonValue) {
-
+                         utils, $rootScope, $translate, jsonValue, $location, $anchorScroll) {
   shortcutFactory.initialize();
   connectionFactory.initialize();
   loadingBoxFactory.initialize();
@@ -180,21 +190,29 @@ techlooper.run(function (shortcutFactory, connectionFactory, loadingBoxFactory, 
     return rsLocationPathFn;
   }
 
-  if ($translate.proposedLanguage() === undefined) {
-    var langKey = (window.navigator.userLanguage || window.navigator.language).substring(0, 2);
-    $translate.use(langKey);
-  }
-  else {
-    $translate.preferredLanguage($translate.proposedLanguage());
+  var doTranslate = function() {
+    $translate(["newGradLevel", "experienced", "manager", "timeline", "numberOfJobs", "jobs", "isRequired", "exItSoftware", "ex149",
+      "salaryRangeJob", "jobNumber", "salaryRangeInJob", "jobNumberLabel", "allLevel", "newGradLevel", "exHoChiMinh", "exManager",
+      "experienced", "manager", "maximum5", "maximum3", "hasExist", "directorAndAbove", "requiredThisField",
+      "genderMale", "genderFemale", "exMale", "exYob", 'exDay', 'day', 'week', 'month']).then(function (translate) {
+      $rootScope.translate = translate;
+    });
   }
 
-  $translate(["newGradLevel", "experienced", "manager", "timeline", "numberOfJobs", "jobs", "isRequired", "exItSoftware", "ex149",
-    "salaryRangeJob", "jobNumber", "salaryRangeInJob", "jobNumberLabel", "allLevel", "newGradLevel", "exHoChiMinh", "exManager",
-    "experienced", "manager", "maximum5", "maximum3", "hasExist", "directorAndAbove", "requiredThisField"]).then(function (translate) {
-    $rootScope.translate = translate;
+  var campaign = $location.search();
+  var langKey = (campaign && campaign.lang);
+  langKey !== $translate.use() && ($translate.use(langKey));
+  $rootScope.$on('$translateChangeSuccess', function () {
+    langKey !== $translate.use() && ($translate.use(langKey));
+    doTranslate();
   });
 
+  doTranslate();
+
   $rootScope.jsonValue = jsonValue;
+
+  //$location.hash("bodyContent");
+  //$anchorScroll("#bodyContent");
 });
 
 techlooper.directive("navigation", function () {
